@@ -1,0 +1,4 @@
+[core]
+    remote = origin
+['remote "local"']
+    url = C:\Users\<YOUR_USERNAME>\DVC_Remotes\mlops-lab-1
