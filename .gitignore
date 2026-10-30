@@ -14,3 +14,10 @@ mlruns/
 
 # Local Food-11 training dataset
 src/food11 dataset/
+
+# MLflow database backups
+mlflow.db.backup
+
+# Local MLflow backups and artifacts
+mlflow-before-path-fix.db
+mlartifacts/

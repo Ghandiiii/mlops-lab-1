@@ -1,0 +1,44 @@
+﻿services:
+  mlflow:
+    build:
+      context: ./mlflow
+    ports:
+      - "127.0.0.1:5001:5000"
+    volumes:
+      - ./mlflow.db:/app/mlflow.db
+      - ./mlruns:/app/mlruns
+      - ./mlartifacts:/app/mlartifacts
+    command:
+      - mlflow
+      - server
+      - --host
+      - 0.0.0.0
+      - --port
+      - "5000"
+      - --backend-store-uri
+      - sqlite:////app/mlflow.db
+      - --default-artifact-root
+      - /app/mlartifacts
+      - --serve-artifacts
+
+  inference:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:8003:8000"
+    volumes:
+      - ./mlruns:/models:ro
+    environment:
+      MODEL_URI: /models/1/models/m-862f468a32214f1c81ccbb135f1621db/artifacts
+      MLFLOW_TRACKING_URI: http://mlflow:5000
+    depends_on:
+      - mlflow
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "127.0.0.1:8501:8501"
+    depends_on:
+      - inference
