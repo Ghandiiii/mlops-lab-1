@@ -1,0 +1,12 @@
+﻿.venv/
+.git/
+.dvc/
+data/
+DVC_Remotes/
+mlruns/
+mlflow.db
+__pycache__/
+*.pyc
+
+# Exclude local training images
+src/food11 dataset/

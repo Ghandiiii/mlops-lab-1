@@ -11,3 +11,6 @@ wheels/
 /data
 mlflow.db
 mlruns/
+
+# Local Food-11 training dataset
+src/food11 dataset/
